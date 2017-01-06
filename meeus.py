@@ -316,6 +316,7 @@ def dirunal_path_horizon(declination_of_body, observer_latitude):
 #Chapter 15#
 ############
 
+#Page 101 & 102
 #The value of 34' is used as the typical value of refraction
 
 #This function does not take into account variations in refraction, and refers to the geometric center of the object
@@ -329,7 +330,23 @@ def hour_angle_of_rise_or_set_low_fidelity(observer_latitude,object_declination)
  n=-math.tan(observer_latitude)*math.tan(object_declination)
  return math.acos(n)
 
+#Page 102 & 103
 
+#This is the check Meeus provides in "note 2 at the end of this chapter"
+#Possible Bug Alert#
+#Meeus says to check the second member of the function.  It is not clear if he means the second term in the numerator,
+#or the second term of the equation if you rewrite it as the sum of two fractions.  I'll find out in testing
+def is_circumpolar(observer_latitude,object_declination):
+ if abs(math.sin(observer_latitude)*math.sin(object_declination)) > 1:
+  return True
+ else:
+  return False
+
+#sidereal_time is 0h Universal Time on the day D of interest
+#ra_ and dec_ are the right ascension and declination of the object at 0h Dynamical Time for D-1, D, and D+1 respectively
+def rise_transit_set(sidereal_time,ra1,ra2,ra3,dec1,dec2,dec3):
+ #first we check to see if the object is circumpolar.  If it is, it will not have a rise or set time.
+ #next we calculate the approximate times
 
 #################################################################################
 #These are functions I wrote to make processing easier. They are not from Meeus.#
