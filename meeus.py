@@ -235,6 +235,14 @@ def local_horizontal_coordinates_astro(hour_angle, observer_latitude, declinatio
  altitude = math.asin(n)
  return [azimuth,altitude]
 
+def local_horizontal_coordinates_nav(hour_angle, observer_latitude, declination):
+ n=math.sin(hour_angle)
+ d=math.cos(hour_angle)*math.sin(observer_latitude) - math.tan(declination)*math.cos(observer_latitude)
+ azimuth = math.atan(n/d)
+ n=math.sin(observer_latitude)*math.sin(declination) + math.cos(observer_latitude)*math.cos(declination)*math.cos(hour_angle)
+ altitude = math.asin(n)
+ return [azimuth+math.pi(),altitude]
+
 #Page 94
 def equitorial_to_local_horizontal(azimuth,altitude,observer_latitude):
  n=math.sin(azimuth)
@@ -314,11 +322,8 @@ def dirunal_path_horizon(declination_of_body, observer_latitude):
 #Bodies for which a disk can be resolved are usually measured from their upper limb.
 #So for the Sun, the semidiameter of 16' is added to the geometric center
 #Variations in refraction can alter the rise and set times by around 20 seconds.
-<<<<<<< HEAD
 #For objects in orbit around the Earth, which can be resolved (like the ISS) some well documented decisions will need to be
 #made about how where the center and limbs of the object are.
-=======
->>>>>>> 046c64f76dc6683ef3cbfd05096a903b6e733b9e
 
 def hour_angle_of_rise_or_set_low_fidelity(observer_latitude,object_declination):
  n=-math.tan(observer_latitude)*math.tan(object_declination)
