@@ -22,7 +22,7 @@ f = 1/298.26524		#Earth flattening constant (unit-less)
 omega_earth = 7.292114992e-5
 
 #Derived Constants
-be - ae*(1-f)	#Polar radius of Earth (meters) (p 81-82)
+be = ae*(1-f)	#Polar radius of Earth (meters) (p 81-82)
 def ee():	#The eccentricity of the Earth's meridian ellipse (unit-less) (p82)
  return math.sqrt(2*f-f*f)
 #phi - phi_prime reaches its maximum value at u=45 degrees. Designate these phi_naught (geographical latitude) and phi_naught_prime (geocentric latitude)
@@ -124,7 +124,7 @@ def date_from_day_of_the_year(year, day_number):
 #H is the observer's height above sea level
 def rho_sin_phi_prime(phi, H):
  u = math.atan((be/ae)*math.tan(phi))
- return (be/ae)*math.tan(phi))
+ return (be/ae)*math.tan(phi)
 
 def rho_cos_phi_prime(phi, H):
  u = math.atan((be/ae)*math.tan(phi))
@@ -136,7 +136,7 @@ def rho_sea_level(phi):
 
 #The parallel of latitude phi is a circle with radius Rp. (page 83)
 def Rp(phi):
- return (ae*math.cos(phi))/math.sqrt(1-ee()*ee()*math.sin(phi)*math.sin(phi)
+ return (ae*math.cos(phi))/(math.sqrt(1-ee()*ee()*math.sin(phi)*math.sin(phi)))
 
 #The length of one degree of longitude for a given latitude (page 83)
 def longitude_degree_length(phi):
@@ -347,6 +347,7 @@ def is_circumpolar(observer_latitude,object_declination):
 def rise_transit_set(sidereal_time,ra1,ra2,ra3,dec1,dec2,dec3):
  #first we check to see if the object is circumpolar.  If it is, it will not have a rise or set time.
  #next we calculate the approximate times
+ return 'nothing yet'
 
 #################################################################################
 #These are functions I wrote to make processing easier. They are not from Meeus.#
@@ -394,7 +395,7 @@ def is_leap_year(year):
  if year%4 > 0:
   return False
  elif year%100 > 0:
-  return True:
+  return True
  elif year%400 > 0:
   return True
 
